@@ -1,4 +1,4 @@
-from models.transacciones import Transaccion
+from utils.transacciones import Transaccion
 
 
 class Proceso:
