@@ -1,3 +1,4 @@
+from decimal import Decimal
 from models.transacciones import Transaccion
 
 
@@ -39,11 +40,13 @@ class Proceso:
                 # pd[["TIPO".str.contains("Débito")]]["TIPO"].sum()
                 if transaccion.tipo == "Crédito":
                     self.n_credito += 1
-                    self.credito += transaccion.monto
+                    self.credito = Decimal(str(self.credito)) \
+                        + Decimal(str(transaccion.monto))
                 if transaccion.tipo == "Débito":
                     self.n_debito += 1
-                    self.debito += transaccion.monto
+                    self.debito = Decimal(
+                        str(self.debito)) + Decimal(str(transaccion.monto))
 
     # INFO: Función para obtener el balance de los datos obtenidos
     def balance(self) -> float:
-        return abs(self.credito - self.debito)
+        return abs(Decimal(str(self.credito)) - Decimal(str(self.debito)))
