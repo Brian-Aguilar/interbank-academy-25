@@ -1,5 +1,4 @@
-
-from models.proceso import Proceso
+from utils.proceso import Proceso
 
 
 if __name__ == "__main__":
