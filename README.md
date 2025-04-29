@@ -1,66 +1,37 @@
 # Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
 
-## Objetivo:
+## Introducción:
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+El reto consiste en desarrollar una aplicación de línea de comandos (CLI) que lea y procese un archivo CSV con datos de transacciones bancarias. Su propósito es automatizar el análisis financiero mediante la generación de un reporte que incluya el balance final, la transacción de mayor monto y el conteo de transacciones por tipo (Crédito y Débito), facilitando así la gestión y comprensión de movimientos financieros.
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+## Instrucciones de Ejecución:
+`WSL en Windows 10 | Ubuntu/Debian o Fedora`
+```bash
+python3 main.py
+```
+`Windows`
+```bash
+python main.py
+```
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+## Enfoque y Solución:
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+Este programa implementa una solución modular para procesar y analizar transacciones bancarias almacenadas en un archivo CSV. El diseño se basa en tres componentes principales: una clase `Transaccion` que actúa como modelo de datos para mapear cada fila del CSV; una clase `Proceso` que encapsula la lógica de carga, análisis y resumen de las transacciones; y un script principal (`main.py`) que instancia el proceso y muestra el reporte en consola. La clase `Proceso` realiza la lectura manual del archivo sin librerías externas como `pandas`, utilizando estructuras básicas para mantener claridad y control del flujo. Se emplea la clase `Decimal` para asegurar precisión en los cálculos monetarios. Durante la carga, se determina simultáneamente la transacción de mayor monto, el conteo de transacciones por tipo, y la suma total por categoría, lo cual optimiza el rendimiento al evitar múltiples pasadas sobre los datos. En resumen, el diseño apuesta por simplicidad, claridad y eficiencia sin depender de bibliotecas avanzadas.
 
----
+## Estructura del Proyecto:
 
-## Instrucciones
+Está organizado de manera clara para facilitar su comprensión y mantenimiento. El archivo principal `main.py` ejecuta la aplicación y genera el reporte de transacciones. Dentro de la carpeta `models/` se define la estructura de los datos con la clase Transaccion, mientras que en `utils/` (que también podría llamarse `services/`) se encuentra la lógica principal en la clase Proceso, que carga, procesa y analiza las transacciones. El archivo `data.csv` contiene los datos de entrada que se procesarán, y el `README.md` ofrece una guía básica sobre el proyecto y su uso. Finalmente, el .gitignore especifica qué archivos deben excluirse del control de versiones, manteniendo el repositorio limpio.
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
-
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
-
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
-
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
-
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
-
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
-
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
-
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
-
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
-
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+```text
+interbank-academy-25/
+├── main.py
+├── models/
+│   ├── __init__.py
+│   └── transacciones.py
+├── utils/  # También se puede nombrar como service/
+│   ├── __init__.py
+│   └── proceso.py
+├── data.csv # También se puede ubicar dentro de una carpeta data/
+├── README.md
+├── .gitignore
+```
